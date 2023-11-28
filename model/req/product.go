@@ -35,3 +35,7 @@ type UpdateSku struct {
 	Stock int64   `json:"stock"`
 	Sale  int64   `json:"sale"`
 }
+
+type ProductInfo struct {
+	ID int `form:"id"`
+}

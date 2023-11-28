@@ -14,7 +14,9 @@ func AdminRouter() http.Handler {
 
 	base := r.Group("api")
 	{
-		base.POST("/login", userAPI.Login) //登录
+		base.POST("/login", userAPI.Login)   //登录
+		base.POST("/upload", userAPI.Upload) //登录
+
 	}
 	base.Use(middleware.JWTAuth()) // JWT 鉴权中间件
 	//用户模块
@@ -78,6 +80,14 @@ func AdminRouter() http.Handler {
 		order.GET("/list", orderAPI.OrderList) // 订单列表
 		order.PUT("", orderAPI.OrderUpdate)    // 更新订单
 		order.DELETE("", orderAPI.OrderDelete) // 删除订单
+	}
+
+	//轮播图模块
+	slideshow := base.Group("/slideShow")
+	{
+		slideshow.GET("/list", slideshowAPI.SlideshowList)   // 列表
+		slideshow.POST("", slideshowAPI.SaveOrUpdate)        // 新增/编辑
+		slideshow.POST("/del", slideshowAPI.SlideshowDelete) // 删除
 	}
 	return r
 }

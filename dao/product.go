@@ -58,7 +58,7 @@ func (*Product) ProductList(req req.ProductList) (list []resp.ProductListVO, tot
 		return list, total
 	}
 	if req.PageNum > 0 && req.PageSize > 0 {
-		err = db.Offset(int((req.PageNum - 1) * req.PageSize)).Limit(int(req.PageSize)).Find(&list).Error
+		err = db.Offset((req.PageNum - 1) * req.PageSize).Limit(req.PageSize).Find(&list).Error
 	} else {
 		err = db.Find(&list).Error
 	}
@@ -68,4 +68,9 @@ func (*Product) ProductList(req req.ProductList) (list []resp.ProductListVO, tot
 func (*Product) GetProductSkuTag(id int) (labels []string) {
 	DB.Model(model.ProductSku{}).Where("product_id=?", id).Pluck("tag", &labels)
 	return
+}
+
+func (*Product) ProductInfo(id int) (resp resp.ProductListVO) {
+	DB.Model(model.Product{}).Where("id=?", id).Preload("Skus").Preload("ProductImg").Preload("ProductDetailImg").First(&resp)
+	return resp
 }

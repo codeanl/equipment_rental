@@ -63,7 +63,6 @@ func (s *Category) GetTreeList() []resp.CategoryListVO {
 	menuTree := s.buildMenuTree(data, 0)
 	return menuTree
 }
-
 func (s *Category) buildMenuTree(menuItems []resp.CategoryListVO, parentID int) []resp.CategoryListVO {
 	tree := make([]resp.CategoryListVO, 0)
 	for _, item := range menuItems {
@@ -74,4 +73,24 @@ func (s *Category) buildMenuTree(menuItems []resp.CategoryListVO, parentID int) 
 		}
 	}
 	return tree
+}
+
+//GetList 获取菜单列表（非树形）
+func (s *Category) GetList(req req.FrontCategoryList) []resp.FrontCategoryListVO {
+	// 从数据库中查询出菜单列表(非树形)
+	list, _ := categoryDao.CategoryList(req)
+	data := utils.CopyProperties[[]resp.FrontCategoryListVO](list)
+	return data
+}
+
+//GetListNextCateAndSpu 获取某个一级菜单下面的自分类及商品
+func (s *Category) GetListNextCateAndSpu(reqd req.FrontCategoryList) []resp.GetListNextCateAndSpu {
+	// 从数据库中查询出菜单列表(非树形)
+	list, _ := categoryDao.CategoryList(reqd)
+	data := utils.CopyProperties[[]resp.GetListNextCateAndSpu](list)
+	for index, i := range data {
+		pro, _ := productDao.ProductList(req.ProductList{CategoryId: int64(i.ID)})
+		data[index].Product = pro
+	}
+	return data
 }

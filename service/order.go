@@ -5,6 +5,7 @@ import (
 	"outdoor_rental/model"
 	"outdoor_rental/model/req"
 	"outdoor_rental/model/resp"
+	"outdoor_rental/utils"
 	"outdoor_rental/utils/r"
 	"time"
 )
@@ -49,6 +50,16 @@ func (*Order) OrderUpdate(req req.OrderUpdate) (code int) {
 	dao.Update(&order)
 	return r.OK
 }
+func (*Order) AddOrder(req req.AddOrder) (code int) {
+	data := utils.CopyProperties[model.Order](req)
+	dao.Create(&data)
+	for _, sku := range req.Sku {
+		sku.OrderId = data.ID
+		s := utils.CopyProperties[model.OrderSku](sku)
+		dao.Create(&s)
+	}
+	return r.OK
+}
 
 // OrderDelete 删除菜单
 func (*Order) OrderDelete(req req.Delete) (code int) {
@@ -59,7 +70,6 @@ func (*Order) OrderDelete(req req.Delete) (code int) {
 			return r.ERROR_CATE_NOT_EXIST
 		}
 	}
-	// 删除菜单
 	dao.Delete(model.Order{}, "id in (?)", req.ID)
 	dao.Delete(model.OrderSku{}, "order_id in (?)", req.ID)
 	return r.OK

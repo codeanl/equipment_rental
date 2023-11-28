@@ -1,7 +1,7 @@
 package model
 
 type OrderSku struct {
-	OrderId int `json:"role_id"`
-	SkuId   int `json:"menu_id"`
+	OrderId int `json:"order_id"`
+	SkuId   int `json:"sku_id"`
 	Count   int `json:"count" `
 }

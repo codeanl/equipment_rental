@@ -10,10 +10,15 @@ const (
 )
 
 var (
-	userDao    dao.User
-	roleDao    dao.Role
-	menuDao    dao.Menu
-	productDao dao.Product
-	memberDao  dao.Member
-	orderDao   dao.Order
+	userDao      dao.User
+	roleDao      dao.Role
+	menuDao      dao.Menu
+	productDao   dao.Product
+	memberDao    dao.Member
+	orderDao     dao.Order
+	slideShowDao dao.SlideShow
+	categoryDao  dao.Category
+	cartDao      dao.Cart
+	addressDao   dao.Address
+	articleDao   dao.Article
 )

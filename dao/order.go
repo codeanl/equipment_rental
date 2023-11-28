@@ -26,7 +26,7 @@ func (*Order) OrderList(req req.OrderList) (list []resp.OrderListVO, total int64
 	if req.PayType != "" {
 		db = db.Where("pay_type = ?", req.PayType)
 	}
-	if req.Status != "" {
+	if req.Status != "" && req.Status != "0" {
 		db = db.Where("status = ?", req.Status)
 	}
 	if req.Address != "" {

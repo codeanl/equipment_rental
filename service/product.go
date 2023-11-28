@@ -108,6 +108,17 @@ func (*Product) ProductList(req req.ProductList) resp.PageResult[[]resp.ProductL
 	}
 }
 
+type DDD struct {
+	Name string `json:"name"`
+}
+
+// ProductInfo 详情
+func (*Product) ProductInfo(req req.ProductInfo) resp.ProductListVO {
+	ddd := productDao.ProductInfo(req.ID)
+
+	return ddd
+}
+
 // SkuUpdate 更新sku
 func (*Product) SkuUpdate(req req.UpdateSku) (code int) {
 	sku := model.ProductSku{

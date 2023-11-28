@@ -20,3 +20,7 @@ type MemberUser struct {
 	Intro    string `gorm:"type:varchar(255);comment:个人简介" json:"intro"`
 	Status   string `gorm:"type:varchar(30);comment:是否禁用(0-禁用 1-正常)" json:"status"`
 }
+type MemberLogin struct {
+	Phone    string `json:"phone" validate:"required" label:"用户名"`
+	Password string `json:"password" validate:"required" label:"密码"`
+}

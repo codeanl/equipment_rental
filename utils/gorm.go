@@ -74,11 +74,16 @@ func MakeMigrate(db *gorm.DB) {
 		&model.RoleMenu{},
 		&model.Category{},
 		&model.ProductImg{},
+		&model.ProductDetailImg{},
 		&model.Product{},
 		&model.Member{},
 		&model.ProductSku{},
 		&model.Order{},
 		&model.OrderSku{},
+		&model.SlideShow{},
+		&model.Cart{},
+		&model.Address{},
+		&model.Article{},
 	)
 	if err != nil {
 		log.Println("gorm 自动迁移失败: ", err)

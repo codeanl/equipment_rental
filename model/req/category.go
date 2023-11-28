@@ -8,3 +8,7 @@ type SaveOrUpdateCategory struct {
 	ParentId int    `json:"parent_id" mapstructure:"parent_id"`
 	Status   string `json:"status" mapstructure:"status"`
 }
+
+type FrontCategoryList struct {
+	ParentId int64 `form:"parent_id"`
+}

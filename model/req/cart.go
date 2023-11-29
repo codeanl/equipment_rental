@@ -6,9 +6,9 @@ type CartList struct {
 	MemberId int `form:"member_id"`
 }
 type SaveOrUpdateCart struct {
-	ID       int  `json:"id"`
-	MemberID int  `json:"member_id"`
-	SkuID    int  `json:"sku_id"`
-	Count    int  `json:"count"`
-	Selected bool `json:"selected"`
+	ID       int    `json:"id"`
+	MemberID int    `json:"member_id"`
+	SkuID    int    `json:"sku_id"`
+	Count    int    `json:"count"`
+	Selected string `json:"selected"`
 }

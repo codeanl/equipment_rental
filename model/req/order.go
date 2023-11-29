@@ -60,3 +60,7 @@ type Sku struct {
 	SkuId   int `json:"sku_id" `
 	Count   int `json:"count" `
 }
+
+type OrderInfo struct {
+	ID int `form:"id" `
+}

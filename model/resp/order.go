@@ -27,4 +27,18 @@ type OrderListVO struct {
 	Note          string    `json:"note" gorm:"type:varchar(191);comment:订单备注;not null"`
 
 	Skus []model.ProductSku `json:"Skus" `
+	//Skus []SkuVO `json:"Skus" `
+}
+
+type SkuVO struct {
+	ID        int     `json:"id"`
+	ProductID int64   `json:"product_id"`
+	Name      string  `json:"name"`
+	Pic       string  `json:"pic"`
+	Desc      string  `json:"desc"`
+	Price     float64 `json:"price"`
+	Stock     int64   `json:"stock"`
+	Sale      int64   `json:"sale"`
+	Tag       string  `json:"tag"`
+	Count     int     `json:"count"`
 }

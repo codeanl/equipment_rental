@@ -1,11 +1,11 @@
 package resp
 
 type CartListVO struct {
-	ID       int  ` json:"id" mapstructure:"id"`
-	MemberID int  ` json:"member_id"`
-	SkuID    int  ` json:"sku_id"`
-	Count    int  ` json:"count"`
-	Selected bool `json:"selected"`
+	ID       int    ` json:"id" mapstructure:"id"`
+	MemberID int    ` json:"member_id"`
+	SkuID    int    ` json:"sku_id"`
+	Count    int    ` json:"count"`
+	Selected string `json:"selected"`
 
 	//
 	Name      string  `json:"name" `

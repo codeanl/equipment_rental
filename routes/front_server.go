@@ -49,9 +49,10 @@ func FrontRouter() http.Handler {
 	order := base.Group("/order")
 	{
 		order.GET("/list", orderFrontAPI.GetOrderList) // 列表
-		order.POST("update", orderFrontAPI.UpdateOrder)
-		order.POST("add", orderFrontAPI.AddOrder)
-		order.POST("/del", orderFrontAPI.DeleteArticle) // 删除
+		order.POST("/update", orderFrontAPI.UpdateOrder)
+		order.POST("/add", orderFrontAPI.AddOrder)
+		order.POST("/del", orderFrontAPI.DeleteOrder) // 删除
+		order.GET("/info", orderFrontAPI.OrderInfo)   // 删除
 	}
 	return r
 }

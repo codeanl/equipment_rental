@@ -12,6 +12,18 @@ import (
 
 type Order struct{}
 
+func (*Order) OrderInfo(req req.OrderInfo) resp.OrderListVO {
+	order := dao.GetOne(model.Order{}, "id", req.ID)
+	data := utils.CopyProperties[resp.OrderListVO](order)
+	orderSku := dao.List([]model.OrderSku{}, "*", "", "order_id =  ?", data.ID)
+	var dd []int
+	for _, i3 := range orderSku {
+		dd = append(dd, i3.SkuId)
+	}
+	data.Skus = dao.List([]model.ProductSku{}, "*", "", "id in ?", dd)
+	return data
+}
+
 //OrderList 订单列表
 func (*Order) OrderList(req req.OrderList) resp.PageResult[[]resp.OrderListVO] {
 	list, count := orderDao.OrderList(req)
@@ -35,10 +47,8 @@ func (*Order) OrderList(req req.OrderList) resp.PageResult[[]resp.OrderListVO] {
 // OrderUpdate 更新
 func (*Order) OrderUpdate(req req.OrderUpdate) (code int) {
 	order := model.Order{
-		ID:           req.ID,
-		Status:       req.Status,
-		TotalAmount:  req.TotalAmount,
-		PledgeAmount: req.PledgeAmount,
+		ID:     req.ID,
+		Status: req.Status,
 	}
 	if req.Status == "1" {
 		order.PaymentTime = time.Now()
